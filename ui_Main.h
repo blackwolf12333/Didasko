@@ -19,7 +19,6 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -36,7 +35,7 @@ public:
     QAction *actionAbout;
     QAction *actionClose;
     QWidget *centralwidget;
-    QWidget *layoutWidget;
+    QHBoxLayout *horizontalLayout_2;
     QHBoxLayout *horizontalLayout;
     QTextEdit *text;
     QVBoxLayout *verticalLayout;
@@ -50,13 +49,12 @@ public:
     QMenu *menuFile;
     QMenu *menuOptions;
     QMenu *menuHelp;
-    QStatusBar *statusbar;
 
     void setupUi(QMainWindow *Main)
     {
         if (Main->objectName().isEmpty())
             Main->setObjectName(QStringLiteral("Main"));
-        Main->resize(796, 605);
+        Main->resize(796, 586);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -84,50 +82,54 @@ public:
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         sizePolicy.setHeightForWidth(centralwidget->sizePolicy().hasHeightForWidth());
         centralwidget->setSizePolicy(sizePolicy);
-        layoutWidget = new QWidget(centralwidget);
-        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(0, 0, 791, 561));
-        horizontalLayout = new QHBoxLayout(layoutWidget);
+        horizontalLayout_2 = new QHBoxLayout(centralwidget);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setContentsMargins(2, 0, 0, 0);
-        text = new QTextEdit(layoutWidget);
+        horizontalLayout->setContentsMargins(2, -1, -1, -1);
+        text = new QTextEdit(centralwidget);
         text->setObjectName(QStringLiteral("text"));
-        text->setMinimumSize(QSize(550, 0));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(50);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(text->sizePolicy().hasHeightForWidth());
+        text->setSizePolicy(sizePolicy1);
+        text->setMinimumSize(QSize(0, 0));
         text->setReadOnly(true);
 
         horizontalLayout->addWidget(text);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        label = new QLabel(layoutWidget);
+        label = new QLabel(centralwidget);
         label->setObjectName(QStringLiteral("label"));
 
         verticalLayout->addWidget(label);
 
-        dictionary = new QTextEdit(layoutWidget);
+        dictionary = new QTextEdit(centralwidget);
         dictionary->setObjectName(QStringLiteral("dictionary"));
         dictionary->setReadOnly(true);
         dictionary->setOverwriteMode(false);
 
         verticalLayout->addWidget(dictionary);
 
-        label_2 = new QLabel(layoutWidget);
+        label_2 = new QLabel(centralwidget);
         label_2->setObjectName(QStringLiteral("label_2"));
 
         verticalLayout->addWidget(label_2);
 
-        grammar = new QTextEdit(layoutWidget);
+        grammar = new QTextEdit(centralwidget);
         grammar->setObjectName(QStringLiteral("grammar"));
         grammar->setReadOnly(true);
 
         verticalLayout->addWidget(grammar);
 
-        label_3 = new QLabel(layoutWidget);
+        label_3 = new QLabel(centralwidget);
         label_3->setObjectName(QStringLiteral("label_3"));
 
         verticalLayout->addWidget(label_3);
 
-        meaning = new QTextEdit(layoutWidget);
+        meaning = new QTextEdit(centralwidget);
         meaning->setObjectName(QStringLiteral("meaning"));
         meaning->setReadOnly(true);
 
@@ -135,6 +137,9 @@ public:
 
 
         horizontalLayout->addLayout(verticalLayout);
+
+
+        horizontalLayout_2->addLayout(horizontalLayout);
 
         Main->setCentralWidget(centralwidget);
         menubar = new QMenuBar(Main);
@@ -147,9 +152,6 @@ public:
         menuHelp = new QMenu(menubar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         Main->setMenuBar(menubar);
-        statusbar = new QStatusBar(Main);
-        statusbar->setObjectName(QStringLiteral("statusbar"));
-        Main->setStatusBar(statusbar);
 
         menubar->addAction(menuFile->menuAction());
         menubar->addAction(menuOptions->menuAction());
