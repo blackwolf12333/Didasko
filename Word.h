@@ -23,11 +23,17 @@ public:
     void setGrammar(QString grammar);
     QString getDictionary();
     void setDictionary(QString dict);
+    QString getExtendedGrammarEntry();
+    void setExtendedGrammarEntry(QString gram);
+    QString getEncyclopediaEntry();
+    void setEncyclopediaEntry(QString enc);
 private:
     QString word;
     QString meaning;
     QString grammar;
     QString dictionary;
+    QString extendedGrammarEntry;
+    QString encyclopediaEntry;
 };
 
 #endif	/* WORD_H */

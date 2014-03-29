@@ -44,3 +44,19 @@ QString Word::getDictionary() {
 void Word::setDictionary(QString dict) {
     this->dictionary = dict;
 }
+
+QString Word::getExtendedGrammarEntry() {
+    return this->extendedGrammarEntry;
+}
+
+void Word::setExtendedGrammarEntry(QString gram) {
+    this->extendedGrammarEntry = gram;
+}
+
+QString Word::getEncyclopediaEntry() {
+    return this->encyclopediaEntry;
+}
+
+void Word::setEncyclopediaEntry(QString enc) {
+    this->encyclopediaEntry = enc;
+}

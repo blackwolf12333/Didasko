@@ -14,6 +14,26 @@ TextParser::TextParser() {
 TextParser::~TextParser() {
 }
 
+void parseMetadata(QString part, Word* word) {
+    // Everything starts with a magic value and if there is other stuff
+    // it adds that after it with a + separating it.
+    if(part.contains('+')) {
+        QStringList split = part.split("+");
+        
+        // starting at 1 because we can't handle the magic value at index 0
+        for(int i = 1; i < split.length(); i++) {
+            switch(i) {
+                case 1: // extended grammar
+                    word->setExtendedGrammarEntry(split.at(i));
+                    break;
+                case 2: // encyclopedia entry
+                    word->setEncyclopediaEntry(split.at(i));
+                    break;
+            }
+        }
+    }
+}
+
 Word parseWord(QString word) {
     Word ret;
     if(word.startsWith("<")) { // lines with words start with this.
@@ -22,17 +42,18 @@ Word parseWord(QString word) {
             QString part = split[i];
             switch(i) {
                 case 0: // first part, contains some magic and the word
+                    parseMetadata(part, &ret); // parses the meta data between <>
                     part = part.remove(0, part.indexOf('>') + 1); // take of the stuff between <>
                                                                   // TODO: find out what it is
                     ret.setWord(part.trimmed());
                     break;
-                case 1: // second part, contains the "betekenis"
+                case 1: // second part, contains the meaning
                     ret.setMeaning(part.trimmed());
                     break;
                 case 2: // third part, contains the grammar
                     ret.setGrammar(part.trimmed());
                     break;
-                case 3: // fourth part, contains the "woordenboek betekenis"
+                case 3: // fourth part, contains the word to look up in the dictionary
                     ret.setDictionary(part.trimmed());
                     break;
             }
