@@ -22,13 +22,14 @@ void parseMetadata(QString part, Word* word) {
         
         // starting at 1 because we can't handle the magic value at index 0
         for(int i = 1; i < split.length(); i++) {
-            switch(i) {
-                case 1: // extended grammar
-                    word->setExtendedGrammarEntry(split.at(i));
-                    break;
-                case 2: // encyclopedia entry
-                    word->setEncyclopediaEntry(split.at(i));
-                    break;
+            if(i == 1) {
+                QString str = split.at(i);
+                QString result = str.remove(str.indexOf(QString(">")), str.length());
+                word->setExtendedGrammarEntry(result);
+            } else if(i == 2) {
+                QString enc = split.at(i);
+                QString result = enc.remove(enc.indexOf(QString(">")), enc.length());
+                word->setEncyclopediaEntry(result);
             }
         }
     }

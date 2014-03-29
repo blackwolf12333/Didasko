@@ -17,6 +17,8 @@ class Main : public QMainWindow {
 public:
     Main();
     virtual ~Main();
+protected:
+    bool eventFilter(QObject *obj, QEvent *event);
 signals:
     void triggered();
 public slots:

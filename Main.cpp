@@ -7,12 +7,17 @@
 
 #include "Main.h"
 #include "TextParser.h"
+#include "ExtendedGrammarForm.h"
 #include <QFileDialog>
+#include <QEvent>
+#include <QKeyEvent>
+#include <Qt>
 #include <qt/QtWidgets/qmessagebox.h>
 
 Main::Main() {
     widget.setupUi(this);
     this->widget.text->setFocus();
+    this->widget.centralwidget->installEventFilter(this);
     this->connectSignals();
     
     indexInText = 0;
@@ -119,4 +124,23 @@ void Main::connectSignals() {
     this->connect(widget.actionGrammar, SIGNAL(triggered()), this, SLOT(onGrammarTriggered()));
     this->connect(widget.actionMeaning, SIGNAL(triggered()), this, SLOT(onMeaningTriggered()));
     this->connect(widget.text, SIGNAL(cursorPositionChanged()), this, SLOT(onCursorPositionChanged()));
+}
+
+bool Main::eventFilter(QObject *obj, QEvent *event) {
+    if(event->type() == QEvent::KeyPress) {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
+        if(keyEvent->key() == 0x47) { // 0x47 == G
+            Word word = this->text.getWords().at(this->indexInText);
+            ExtendedGrammarForm extendedGrammar(word.getExtendedGrammarEntry());
+            extendedGrammar.exec();
+            return true;
+        } else if(keyEvent->key() == 0x45) { // 0x45 == E
+            Word word = this->text.getWords().at(this->indexInText);
+            // TODO: add encyclopedia form here
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
 }
