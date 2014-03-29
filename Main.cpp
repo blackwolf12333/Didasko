@@ -8,6 +8,7 @@
 #include "Main.h"
 #include "TextParser.h"
 #include <QFileDialog>
+#include <qt/QtWidgets/qmessagebox.h>
 
 Main::Main() {
     widget.setupUi(this);
@@ -24,7 +25,7 @@ Main::~Main() {
 }
 
 void Main::onAboutTriggered() {
-    //TODO: show about pop up
+    QMessageBox::information(this, "About", "Made by Peter Maatman\nReleased under GPLv3");
 }
 
 void Main::onOpenTriggered() {
