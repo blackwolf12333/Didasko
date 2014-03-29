@@ -14,35 +14,42 @@ TextParser::TextParser() {
 TextParser::~TextParser() {
 }
 
+Word parseWord(QString word) {
+    Word ret;
+    if(word.startsWith("<")) { // lines with words start with this.
+        QStringList split = word.split("#");
+        for(int i = 0; i < split.length(); i++) {
+            QString part = split[i];
+            switch(i) {
+                case 0: // first part, contains some magic and the word
+                    part = part.remove(0, part.indexOf('>') + 1); // take of the stuff between <>
+                                                                  // TODO: find out what it is
+                    ret.setWord(part.trimmed());
+                    break;
+                case 1: // second part, contains the "betekenis"
+                    ret.setMeaning(part.trimmed());
+                    break;
+                case 2: // third part, contains the grammar
+                    ret.setGrammar(part.trimmed());
+                    break;
+                case 3: // fourth part, contains the "woordenboek betekenis"
+                    ret.setDictionary(part.trimmed());
+                    break;
+            }
+        }
+    }
+    return ret;
+}
+
 Text parseText(QString string, Text text) {
     QStringList lines = string.split("\n");
     Word word;
-    for(QString line : lines) {
+    for(int j = 0; j < lines.length(); j++) {
+        QString line = lines.at(j);
         if(line.length() == 0) { // ignore blank lines
             continue;
         }
-        if(line.startsWith("<")) { // lines with words start with this.
-            QStringList split = line.split("#");
-            for(int i = 0; i < split.length(); i++) {
-                QString part = split[i];
-                switch(i) {
-                    case 0: // first part, contains some magic and the word
-                        part = part.remove(0, part.indexOf('>') + 1); // take of the stuff between <>
-                                                                      // TODO: find out what it is
-                        word.setWord(part.trimmed());
-                        break;
-                    case 1: // second part, contains the "betekenis"
-                        word.setMeaning(part.trimmed());
-                        break;
-                    case 2: // third part, contains the grammar
-                        word.setGrammar(part.trimmed());
-                        break;
-                    case 3: // fourth part, contains the "woordenboek betekenis"
-                        word.setDictionary(part.trimmed());
-                        break;
-                }
-            }
-        }
+        word = parseWord(line);
         if(word.getWord().length() != 0)
             text.addWord(word);
     }
@@ -51,8 +58,9 @@ Text parseText(QString string, Text text) {
 
 Text finishBuildingText(Text text) {
     QString builder;
-    for(Word woord : text.getWords()) {
-        builder.append(woord.getWord() + " ");
+    for(int i = 0; i < text.getWords().length(); i++) {
+        Word word = text.getWords().at(i);
+        builder.append(word.getWord() + " ");
     }
     text.setText(builder);
     return text;
