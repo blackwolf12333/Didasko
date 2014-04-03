@@ -2,4 +2,6 @@
 build/
 dist/
 nbproject/
-moc_*
+moc_*.cpp
+Grammatica/
+Encyclopedie/
