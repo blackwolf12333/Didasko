@@ -82,7 +82,11 @@ Text finishBuildingText(Text text) {
     QString builder;
     for(int i = 0; i < text.getWords().length(); i++) {
         Word word = text.getWords().at(i);
-        builder.append(word.getWord() + " ");
+        if(word.getWord().endsWith(QString("."))) {
+            builder.append(word.getWord() + " ");
+        } else {
+            builder.append(word.getWord() + " ");
+        }
     }
     text.setText(builder);
     return text;
