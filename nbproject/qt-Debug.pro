@@ -21,4 +21,4 @@ QMAKE_CC = clang
 QMAKE_CXX = clang++
 DEFINES += 
 INCLUDEPATH += . 
-LIBS += -lcppunit -ldl  
+LIBS += 

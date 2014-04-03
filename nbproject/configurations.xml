@@ -71,10 +71,6 @@
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f2</output>
-          <linkerLibItems>
-            <linkerLibLibItem>cppunit</linkerLibLibItem>
-            <linkerLibLibItem>dl</linkerLibLibItem>
-          </linkerLibItems>
         </linkerTool>
       </compileType>
       <item path="EncyclopediaDialog.cpp" ex="false" tool="1" flavor2="0">
