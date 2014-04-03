@@ -14,36 +14,21 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
-#include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QTextEdit>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_AboutForm
 {
 public:
-    QDialogButtonBox *buttonBox;
-    QTextEdit *licence;
 
     void setupUi(QDialog *AboutForm)
     {
         if (AboutForm->objectName().isEmpty())
             AboutForm->setObjectName(QStringLiteral("AboutForm"));
-        AboutForm->resize(583, 305);
-        buttonBox = new QDialogButtonBox(AboutForm);
-        buttonBox->setObjectName(QStringLiteral("buttonBox"));
-        buttonBox->setGeometry(QRect(490, 20, 81, 241));
-        buttonBox->setOrientation(Qt::Vertical);
-        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
-        licence = new QTextEdit(AboutForm);
-        licence->setObjectName(QStringLiteral("licence"));
-        licence->setGeometry(QRect(10, 10, 471, 281));
-        licence->setReadOnly(true);
+        AboutForm->resize(400, 300);
 
         retranslateUi(AboutForm);
-        QObject::connect(buttonBox, SIGNAL(accepted()), AboutForm, SLOT(accept()));
-        QObject::connect(buttonBox, SIGNAL(rejected()), AboutForm, SLOT(reject()));
 
         QMetaObject::connectSlotsByName(AboutForm);
     } // setupUi
