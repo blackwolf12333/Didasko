@@ -1,7 +1,4 @@
-.dep.inc
-build/
-dist/
-nbproject/
 moc_*.cpp
 Grammatica/
 Encyclopedie/
+moc_AboutForm.cpp	
