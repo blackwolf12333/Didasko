@@ -5,9 +5,9 @@
  * Created on March 29, 2014, 5:54 PM
  */
 
-#include <qt/QtWidgets/qmessagebox.h>
-#include <qt/QtCore/qfile.h>
-#include <qt/QtCore/qtextstream.h>
+#include <QMessageBox>
+#include <QFile>
+#include <QTextStream>
 
 #include "ExtendedGrammarForm.h"
 
