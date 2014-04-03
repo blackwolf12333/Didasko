@@ -8,6 +8,7 @@
 #include "Main.h"
 #include "TextParser.h"
 #include "ExtendedGrammarForm.h"
+#include "EncyclopediaDialog.h"
 #include <QFileDialog>
 #include <QEvent>
 #include <QKeyEvent>
@@ -136,7 +137,12 @@ bool Main::eventFilter(QObject *obj, QEvent *event) {
             return true;
         } else if(keyEvent->key() == 0x45) { // 0x45 == E
             Word word = this->text.getWords().at(this->indexInText);
-            // TODO: add encyclopedia form here
+            QMessageBox::information(this, QString(word.getEncyclopediaEntry()), QString("bla"));
+            if(!word.getEncyclopediaEntry().isEmpty()) {
+                EncyclopediaDialog encyclopedia(word.getEncyclopediaEntry());
+                encyclopedia.exec();
+            }
+            return true;
         } else {
             return false;
         }
