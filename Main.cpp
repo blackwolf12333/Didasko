@@ -13,7 +13,7 @@
 #include <QEvent>
 #include <QKeyEvent>
 #include <Qt>
-#include <qt/QtWidgets/qmessagebox.h>
+#include <QMessageBox>
 
 Main::Main() {
     widget.setupUi(this);
