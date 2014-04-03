@@ -132,8 +132,10 @@ bool Main::eventFilter(QObject *obj, QEvent *event) {
         QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
         if(keyEvent->key() == 0x47) { // 0x47 == G
             Word word = this->text.getWords().at(this->indexInText);
-            ExtendedGrammarForm extendedGrammar(word.getExtendedGrammarEntry());
-            extendedGrammar.exec();
+            if(!word.getExtendedGrammarEntry().isEmpty()) {
+                ExtendedGrammarForm extendedGrammar(word.getExtendedGrammarEntry());
+                extendedGrammar.exec();
+            }
             return true;
         } else if(keyEvent->key() == 0x45) { // 0x45 == E
             Word word = this->text.getWords().at(this->indexInText);

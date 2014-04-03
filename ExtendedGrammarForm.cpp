@@ -13,6 +13,7 @@
 
 ExtendedGrammarForm::ExtendedGrammarForm(QString gram) {
     this->widget.setupUi(this);
+    this->setWindowTitle(QString("Extra grammatica informatie"));
     this->widget.textEdit->setText(this->loadExtendedGrammar(gram));
 }
 
@@ -20,7 +21,7 @@ ExtendedGrammarForm::~ExtendedGrammarForm() {
 }
 
 QString ExtendedGrammarForm::loadExtendedGrammar(QString gram) {
-    QFile file(QString("Grammatica/") + gram); // TODO: make this find the installation directory
+    QFile file(QString("Grammatica/") + gram + QString(".txt")); // TODO: make this find the installation directory
     if(!file.open(QIODevice::ReadOnly)) {
         QMessageBox::critical(0, "Error", file.errorString(), file.fileName());
     }
