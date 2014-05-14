@@ -21,8 +21,11 @@ void parseMetadata(QString part, Word* word) {
         QStringList split = part.split("+");
         
         // starting at 1 because we can't handle the magic value at index 0
-        for(int i = 1; i < split.length(); i++) {
-            if(i == 1) {
+        for(int i = 0; i < split.length(); i++) {
+            if(i == 0) {
+                word.setTooltip(getTooltipFrom(split.at(i)));
+                QString ttip = split.at(i).remove(3, 5);
+            } else if(i == 1) {
                 QString str = split.at(i);
                 QString result = str.remove(str.indexOf(QString(">")), str.length());
                 word->setExtendedGrammarEntry(result);
@@ -46,6 +49,10 @@ Word parseWord(QString word) {
                     parseMetadata(part, &ret); // parses the meta data between <>
                     part = part.remove(0, part.indexOf('>') + 1); // take of the stuff between <>
                                                                   // TODO: find out what it is
+                    if(part.contains('.')) {
+                        // end of sentence, put the linkedWords right here.
+                        
+                    }
                     ret.setWord(part.trimmed());
                     break;
                 case 1: // second part, contains the meaning
