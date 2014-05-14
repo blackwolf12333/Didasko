@@ -60,3 +60,19 @@ QString Word::getEncyclopediaEntry() {
 void Word::setEncyclopediaEntry(QString enc) {
     this->encyclopediaEntry = enc;
 }
+
+QString Word::getTooltip() {
+    return this->tooltip;
+}
+
+void Word::setTooltip(QString ttip) {
+    this->tooltip = ttip;
+}
+
+int[] Word::getLinkedWords() {
+    return this->linkedWords;
+}
+
+void Word::setLinkedWords(int[] linkedwords) {
+    this->linkedWords = linkedwords;
+}
