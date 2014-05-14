@@ -27,6 +27,10 @@ public:
     void setExtendedGrammarEntry(QString gram);
     QString getEncyclopediaEntry();
     void setEncyclopediaEntry(QString enc);
+    QString getTooltip();
+    void setTooltip(QString tooltip);
+    int[] getLinkedWords();
+    void setLinkedWords(int[] linkedWords);
 private:
     QString word;
     QString meaning;
@@ -34,6 +38,8 @@ private:
     QString dictionary;
     QString extendedGrammarEntry;
     QString encyclopediaEntry;
+    int[] linkedWords;
+    QString tooltip;
 };
 
 #endif	/* WORD_H */
